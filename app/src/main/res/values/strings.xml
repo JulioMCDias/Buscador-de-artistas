@@ -5,10 +5,16 @@
     <string name="password">Senha</string>
     <string name="btn_logar">logar</string>
     <string name="create_new_login">Não possui uma conta?</string>
-    <string name="delete">apagar</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="email">Email</string>
     <string name="confirmar_password">Confirmar senha</string>
     <string name="save">Salvar</string>
     <string name="date_of_birth">Data de nascimento</string>
+    <string name="views">visualizações</string>
+    <string name="name_card">Nome:</string>
+    <string name="arts_photo">arts photo</string>
+    <string name="list_favourite">Listar Favoritos</string>
+    <string name="search">Pesquisar</string>
+    <string name="logout">sair</string>
+    <string name="login">login</string>
 </resources>
