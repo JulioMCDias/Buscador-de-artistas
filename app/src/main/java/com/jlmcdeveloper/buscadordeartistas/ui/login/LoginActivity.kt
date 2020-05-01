@@ -1,7 +1,8 @@
-package com.jlmcdeveloper.buscadordeartistas
+package com.jlmcdeveloper.buscadordeartistas.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jlmcdeveloper.buscadordeartistas.R
 
 class LoginActivity : AppCompatActivity() {
 
