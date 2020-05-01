@@ -10,4 +10,5 @@
     <string name="email">Email</string>
     <string name="confirmar_password">Confirmar senha</string>
     <string name="save">Salvar</string>
+    <string name="date_of_birth">Data de nascimento</string>
 </resources>
