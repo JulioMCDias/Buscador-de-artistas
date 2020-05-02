@@ -1,6 +1,5 @@
 package com.jlmcdeveloper.buscadordeartistas.data.api
 
-import com.jlmcdeveloper.buscadordeartistas.data.model.Artist
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,12 +26,11 @@ class AppArtistDataSource(private val artistApi: ArtistApi) : ArtistDataSource {
                         rank?.nacional != null -> rank.nacional!!.forEach{ artists.add(it)}
                         rank?.internacional != null -> rank.internacional!!.forEach{ artists.add(it)}
                     }
-
                     success(artists)
+
                 } else {
                     failure()
                 }
-
 
             override fun onFailure(call: Call<ArtistResponse>, t: Throwable?) {
                 failure()
