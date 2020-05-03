@@ -6,18 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:menu="@menu/menu_arts"
-        app:theme="@style/ToolBarStyle"
-        app:titleTextColor="@android:color/white"
-        app:title="@string/list_artisits"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:menu="@menu/menu_arts"
+            app:theme="@style/ToolBarStyle"
+            app:titleTextColor="@android:color/white"
+            app:title="@string/list_artisits" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        app:layout_constraintTop_toBottomOf="@+id/appBar_main"
         tools:listitem="@layout/arts_item"/>
 
 

@@ -25,8 +25,8 @@ class Repository(private val artistDataSource: ArtistDataSource, private val db:
 
 
     // --------- usuarios ------------
-    override fun createUser(user: User, success : (String) -> Unit, failure: () -> Unit) {
-        db.createUser(user, success, failure)
+    override fun createUser(user: User, success : () -> Unit, failure: () -> Unit) {
+        db.createUser(user, { success() }, failure)
     }
 
     override fun getUser(user: User, success: () -> Unit, failure: (String) -> Unit) {

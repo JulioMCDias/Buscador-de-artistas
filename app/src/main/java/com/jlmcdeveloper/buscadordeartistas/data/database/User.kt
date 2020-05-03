@@ -2,10 +2,8 @@ package com.jlmcdeveloper.buscadordeartistas.data.database
 
 
 
-data class User(val name: String, val email: String, val password: String, val date: String){
-    constructor(name: String, password: String): this(name, "", password, "")
-
-    lateinit var idUser: String
+data class User(val name: String, val email: String, val password: String, val date: String, val idUser: String){
+    constructor(name: String, password: String): this(name, "", password, "", "")
 
     companion object{
         const val Table = "users"

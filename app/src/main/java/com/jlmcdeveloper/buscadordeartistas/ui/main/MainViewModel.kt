@@ -32,7 +32,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         })
     }
 
-
-
-
+    fun logout(){
+        repository.logout()
+    }
 }

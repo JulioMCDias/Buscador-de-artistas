@@ -2,6 +2,7 @@ package com.jlmcdeveloper.buscadordeartistas.di
 
 import com.jlmcdeveloper.buscadordeartistas.data.Repository
 import com.jlmcdeveloper.buscadordeartistas.ui.createlogin.CreateLoginViewModel
+import com.jlmcdeveloper.buscadordeartistas.ui.editlogin.EditLoginViewModel
 import com.jlmcdeveloper.buscadordeartistas.ui.login.LoginViewModel
 import com.jlmcdeveloper.buscadordeartistas.ui.main.MainViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -19,4 +20,8 @@ val newUserModule = module{
     viewModel { CreateLoginViewModel(get() as Repository) }
 }
 
-val activityModules = listOf(mainModule, loginModule, newUserModule)
+val editLoginModule = module {
+    viewModel { EditLoginViewModel(get() as Repository) }
+}
+
+val activityModules = listOf(mainModule, loginModule, newUserModule, editLoginModule)
