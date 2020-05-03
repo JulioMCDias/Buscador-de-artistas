@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.loadingVisibility.observe(this, Observer {
             pb_loading.visibility = if(it) View.VISIBLE else View.GONE
             layout_loading.visibility = if(it) View.VISIBLE else View.GONE
+            (recyclerView.adapter as ArtistAdapter).notifyDataSetChanged()
         })
 
         // ----- mensagem de erro -------

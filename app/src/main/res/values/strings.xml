@@ -27,4 +27,6 @@
     <string name="error_update_user">Erro ao atualizar usuario </string>
     <string name="error_in_login">Erro ao fazer o login</string>
     <string name="edit_user">Editar usuario </string>
+    <string name="error_in_list">Erro ao carregar a lista</string>
+    <string name="update_list">Atualizar</string>
 </resources>
