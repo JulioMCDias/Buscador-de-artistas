@@ -12,14 +12,11 @@ class FavoriteDao(private val db: FirebaseFirestore) {
             .set(favorite.getRegister())
     }
 
-    fun getFavorites(
-        idUser: String,
-        success: (List<Favorite>) -> Unit,
-        failure: () -> Unit
-    )
-    {
+    fun getFavorites(idUser: String, success: (List<Favorite>) -> Unit, failure: () -> Unit) {
         val ref = db.collection(User.Table).document(idUser)
-            .collection(Favorite.Table).whereEqualTo(Favorite.ColumnEnable, true)
+            .collection(Favorite.Table)
+
+            ref.whereEqualTo(Favorite.ColumnEnable, true)
             .get()
             .addOnSuccessListener { favorites ->
                 if (!favorites.isEmpty) {
@@ -29,16 +26,16 @@ class FavoriteDao(private val db: FirebaseFirestore) {
                             Favorite(
                                 idArtist = it.id,
                                 name = it.getString(Favorite.ColumnName)!!,
-                                url = it.getString(Favorite.ColumnName)!!,
-                                picSmall = it.getString(Favorite.ColumnName)!!,
-                                views = it.getString(Favorite.ColumnName)!!,
-                                enable = it.getBoolean(Favorite.ColumnName)!!
+                                url = it.getString(Favorite.ColumnUrl)!!,
+                                picSmall = it.getString(Favorite.ColumnPicSmall)!!,
+                                views = it.getString(Favorite.ColumnViews)!!,
+                                enable = it.getBoolean(Favorite.ColumnEnable)!!
                             )
                         )
                     }
                     success(list)
                 } else
-                    failure()
+                    success(mutableListOf())
             }
             .addOnFailureListener { failure() }
     }

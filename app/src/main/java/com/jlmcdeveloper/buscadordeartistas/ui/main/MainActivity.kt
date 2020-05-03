@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.jlmcdeveloper.buscadordeartistas.R
-import com.jlmcdeveloper.buscadordeartistas.data.model.ArtistItem
 import com.jlmcdeveloper.buscadordeartistas.ui.editlogin.EditLoginActivity
 import com.jlmcdeveloper.buscadordeartistas.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.loadingVisibility.observe(this, Observer {
             pb_loading.visibility = if(it) View.VISIBLE else View.GONE
             layout_loading.visibility = if(it) View.VISIBLE else View.GONE
+        })
+
+        // ----- mensagem de erro -------
+        viewModel.message.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
     }
 

@@ -2,6 +2,7 @@ package com.jlmcdeveloper.buscadordeartistas.data.model
 
 import android.widget.ImageView
 import com.jlmcdeveloper.buscadordeartistas.data.api.ArtistResponse
+import com.jlmcdeveloper.buscadordeartistas.data.database.model.Favorite
 import com.squareup.picasso.Picasso
 
 data class ArtistItem(
@@ -19,6 +20,15 @@ data class ArtistItem(
         pic_small = artist.pic_small,
         views = artist.views.toString(),
         favorit  = favor
+    )
+
+    constructor(favorite: Favorite) : this(
+        idArtist = favorite.idArtist,
+        name = favorite.name,
+        url = favorite.url,
+        pic_small = favorite.picSmall,
+        views = favorite.views,
+        favorit  = favorite.enable
     )
 
     fun setImage(imageView: ImageView) {
