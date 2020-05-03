@@ -1,20 +1,26 @@
 package com.jlmcdeveloper.buscadordeartistas.data.api
 
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppArtistDataSource(private val artistApi: ArtistApi) : ArtistDataSource {
+class AppArtistDataSource(private val apiRest: ApiRestServer) : ArtistDataSource {
 
-    override fun listArtist(success: (List<Artist>) -> Unit, failure: () -> Unit) {
-        val call = artistApi.listArtist(type, period, scope, limit, apikey)
+    override fun listArtist(success: (List<ArtistResponse.Artist>) -> Unit, failure: () -> Unit) {
+        val call = apiRest.listArtist(
+            ApiEndPoint.type,
+            ApiEndPoint.period,
+            ApiEndPoint.scope,
+            ApiEndPoint.limit,
+            ApiEndPoint.apikey)
 
         call.enqueue(object : Callback<ArtistResponse> {
             override fun onResponse(call: Call<ArtistResponse>, response: Response<ArtistResponse>) =
                 if (response.isSuccessful) {
-                    val artists = mutableListOf<Artist>()
+                    val artists = mutableListOf<ArtistResponse.Artist>()
 
-                    var rank: Rank? = null
+                    var rank: ArtistResponse.Rank? = null
                     when {
                         response.body()?.art?.month != null -> rank = response.body()?.art?.month!!
                         response.body()?.art?.week != null -> rank = response.body()?.art?.week!!

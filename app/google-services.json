@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "755723807296",
+    "firebase_url": "https://buscadordeartistas.firebaseio.com",
+    "project_id": "buscadordeartistas",
+    "storage_bucket": "buscadordeartistas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755723807296:android:a1c5ee2de513799d398da5",
+        "android_client_info": {
+          "package_name": "com.jlmcdeveloper.buscadordeartistas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755723807296-h2kpg93pp3mt626kg9gs6qhenlrhhb2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWKe5YspYJBaM-iCYyK1bDng0EeZz6pAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755723807296-h2kpg93pp3mt626kg9gs6qhenlrhhb2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

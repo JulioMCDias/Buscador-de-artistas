@@ -7,6 +7,7 @@
     <string name="create_new_login">Não possui uma conta?</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="email">Email</string>
+    <string name="email_valid">Email invalido</string>
     <string name="confirmar_password">Confirmar senha</string>
     <string name="save">Salvar</string>
     <string name="date_of_birth">Data de nascimento</string>
@@ -17,4 +18,10 @@
     <string name="search">Pesquisar</string>
     <string name="logout">sair</string>
     <string name="login">login</string>
+    <string name="campNull">Este campo é obrigatório</string>
+    <string name="new_user">Criar novo usuario</string>
+    <string name="list_artisits">Lista dos artistas</string>
+    <string name="user_create">"Usuario criado"</string>
+    <string name="error_new_user">Erro ao criar usuario</string>
+    <string name="error_in_login">Erro ao fazer o login</string>
 </resources>

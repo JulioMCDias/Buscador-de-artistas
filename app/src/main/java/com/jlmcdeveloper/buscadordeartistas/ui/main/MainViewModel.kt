@@ -1,13 +1,13 @@
-package com.jlmcdeveloper.buscadordeartistas.ui.artistlist
+package com.jlmcdeveloper.buscadordeartistas.ui.main
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jlmcdeveloper.buscadordeartistas.data.ArtistRepository
+import com.jlmcdeveloper.buscadordeartistas.data.Repository
 import com.jlmcdeveloper.buscadordeartistas.data.model.ArtistItem
 
-class MainViewModel(private val repository: ArtistRepository): ViewModel() {
+class MainViewModel(private val repository: Repository): ViewModel() {
     var artists = MutableLiveData<MutableList<ArtistItem>>()
     val loadingVisibility = ObservableBoolean(false)
     val message = ObservableField<String>()

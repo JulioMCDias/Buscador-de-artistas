@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.createlogin.CreateLoginActivity"/>
-        <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.artistlist.MainActivity">
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

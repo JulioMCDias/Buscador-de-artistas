@@ -1,6 +1,5 @@
-package com.jlmcdeveloper.buscadordeartistas.ui.artistlist
+package com.jlmcdeveloper.buscadordeartistas.ui.main
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
