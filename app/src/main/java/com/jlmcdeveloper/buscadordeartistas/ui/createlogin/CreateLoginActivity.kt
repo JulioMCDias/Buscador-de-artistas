@@ -23,13 +23,13 @@ class CreateLoginActivity : AppCompatActivity() {
         loading(false);
 
         btnSave.setOnClickListener {
-            loading(true)
-
             if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
                 validateCamp(editTextPassword, textInputLayoutPassword, getString(R.string.campNull)) and
                 validateCamp(editTextDate, textInputLayoutDate, getString(R.string.campNull)) and
                 validateEmail(editTextEmail, textInputLayoutEmail, getString(R.string.campNull),
                     getString(R.string.email_valid))) {
+
+                loading(true)
 
                 viewModel.btnRegister(
                     editTextName.text.toString(),

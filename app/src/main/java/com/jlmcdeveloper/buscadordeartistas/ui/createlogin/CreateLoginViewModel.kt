@@ -1,9 +1,8 @@
 package com.jlmcdeveloper.buscadordeartistas.ui.createlogin
 
 import androidx.lifecycle.ViewModel
-import com.jlmcdeveloper.buscadordeartistas.data.Repository
 import com.jlmcdeveloper.buscadordeartistas.data.UserRepository
-import com.jlmcdeveloper.buscadordeartistas.data.database.User
+import com.jlmcdeveloper.buscadordeartistas.data.database.model.User
 
 class CreateLoginViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -15,7 +14,13 @@ class CreateLoginViewModel(private val repository: UserRepository) : ViewModel()
         success: () -> Unit,
         failure: () -> Unit)
     {
-        val user = User(name, email, password, date, "")
+        val user = User(
+            name,
+            email,
+            password,
+            date,
+            ""
+        )
         repository.createUser(user, success, failure)
     }
 

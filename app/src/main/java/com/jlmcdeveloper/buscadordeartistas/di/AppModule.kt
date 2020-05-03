@@ -5,7 +5,9 @@ import com.jlmcdeveloper.buscadordeartistas.data.Repository
 import com.jlmcdeveloper.buscadordeartistas.data.api.ApiEndPoint
 import com.jlmcdeveloper.buscadordeartistas.data.api.ApiRestServer
 import com.jlmcdeveloper.buscadordeartistas.data.api.AppArtistDataSource
+import com.jlmcdeveloper.buscadordeartistas.data.database.FavoriteDao
 import com.jlmcdeveloper.buscadordeartistas.data.database.HelperDatabase
+import com.jlmcdeveloper.buscadordeartistas.data.database.UserDao
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -33,7 +35,11 @@ val apiModule = module {
 val databaseModule = module {
     //Access a Cloud Firestore instance
     single { FirebaseFirestore.getInstance() }
-    single { HelperDatabase(get()) }
+
+    single { FavoriteDao(get()) }
+    single { UserDao(get()) }
+
+    single { HelperDatabase(get(), get()) }
 }
 
 val repositoryModule = module {

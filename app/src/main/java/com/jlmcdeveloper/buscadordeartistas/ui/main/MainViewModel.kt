@@ -1,38 +1,37 @@
 package com.jlmcdeveloper.buscadordeartistas.ui.main
 
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jlmcdeveloper.buscadordeartistas.data.Repository
+import com.jlmcdeveloper.buscadordeartistas.data.ArtistRepository
+import com.jlmcdeveloper.buscadordeartistas.data.database.model.Favorite
 import com.jlmcdeveloper.buscadordeartistas.data.model.ArtistItem
 
-class MainViewModel(private val repository: Repository): ViewModel() {
+class MainViewModel(private val repository: ArtistRepository) : ViewModel() {
     var artists = MutableLiveData<MutableList<ArtistItem>>()
-    val loadingVisibility = ObservableBoolean(false)
-    val message = ObservableField<String>()
+    val loadingVisibility = MutableLiveData(false)
 
-    fun load(){
-        loadingVisibility.set(true)
-        message.set("")
+    fun loadListArtist() {
+        loadingVisibility.postValue(true)
 
         repository.listArtist({ items ->
             val listArtist = ArrayList<ArtistItem>()
 
-            items.forEach{
-                listArtist.add(
-                    ArtistItem(it.name, it.url, it.pic_small, it.views.toString(), false))
+            items.forEach {
+                listArtist.add(ArtistItem(it, false))
             }
             artists.postValue(listArtist)
-            loadingVisibility.set(false)
-        },{
-            // error implement
-            message.set("Erro")
-            loadingVisibility.set(false)
-        })
+            loadingVisibility.postValue(false)
+
+        }, { loadingVisibility.postValue(false) })
     }
 
-    fun logout(){
+
+    fun updateArtistFavorite(artist: ArtistItem) {
+        repository.updateFavorites(Favorite(artist))
+    }
+
+
+    fun logout() {
         repository.logout()
     }
 }

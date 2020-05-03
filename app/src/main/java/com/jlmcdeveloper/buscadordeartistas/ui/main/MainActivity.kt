@@ -13,6 +13,7 @@ import com.jlmcdeveloper.buscadordeartistas.ui.editlogin.EditLoginActivity
 import com.jlmcdeveloper.buscadordeartistas.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,24 +24,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbarMain)
+        recyclerView.adapter = ArtistAdapter(ArrayList(), viewModel)
 
-
-        recyclerView.adapter = ArtistAdapter(ArrayList())
-
-        val observer = Observer<MutableList<ArtistItem>> { t ->
+        // ------ update da lista -------
+        viewModel.artists.observe(this, Observer {
                 (recyclerView.adapter as ArtistAdapter)
-                    .updateItems(ArrayList(t!!.toMutableList()))
-            loading(false)
-            }
-        viewModel.artists.observe(this, observer)
+                    .updateItems(ArrayList(it!!.toMutableList()))
+        })
 
+        // ------ animação de carregamento ----------
+        viewModel.loadingVisibility.observe(this, Observer {
+            pb_loading.visibility = if(it) View.VISIBLE else View.GONE
+            layout_loading.visibility = if(it) View.VISIBLE else View.GONE
+        })
     }
 
 
     override fun onStart() {
         super.onStart()
-        viewModel.load()
-        loading(true)
+        viewModel.loadListArtist()
     }
 
 
@@ -53,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.logout()
                 finish()
             }
-
         }
         return true
     }
@@ -62,11 +63,5 @@ class MainActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_arts, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-
-    private fun loading(enable: Boolean){
-        pb_loading.visibility = if(enable) View.VISIBLE else View.GONE
-        layout_loading.visibility = if(enable) View.VISIBLE else View.GONE
     }
 }

@@ -24,7 +24,7 @@ class EditLoginActivity : AppCompatActivity() {
         setTexts()
 
         btnSave.setOnClickListener {
-            loading(true)
+
 
             if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
                 validateCamp(editTextPassword, textInputLayoutPassword, getString(R.string.campNull)) and
@@ -32,7 +32,7 @@ class EditLoginActivity : AppCompatActivity() {
                 validateEmail(editTextEmail, textInputLayoutEmail, getString(R.string.campNull),
                     getString(R.string.email_valid))
             ) {
-
+                loading(true)
                 viewModel.btnSave(
                     editTextName.text.toString(),
                     editTextEmail.text.toString(),

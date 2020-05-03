@@ -10,5 +10,11 @@ data class ArtistResponse(val art: Art?) {
         val internacional: List<Artist>?
     )
 
-    data class Artist(val name: String?, val url: String?, val pic_small: String?, val views: Int?)
+    data class Artist(
+        val id: String?,
+        val name: String?,
+        val url: String?,
+        val pic_small: String?,
+        val views: Int?
+    )
 }

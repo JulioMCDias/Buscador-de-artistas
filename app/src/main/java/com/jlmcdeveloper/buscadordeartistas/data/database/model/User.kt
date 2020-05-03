@@ -1,4 +1,4 @@
-package com.jlmcdeveloper.buscadordeartistas.data.database
+package com.jlmcdeveloper.buscadordeartistas.data.database.model
 
 
 
@@ -16,10 +16,10 @@ data class User(val name: String, val email: String, val password: String, val d
 
     fun getRegister(): Map<String, Any> {
         return hashMapOf(
-            "name" to name,
-            "email" to email,
-            "password" to password,
-            "date" to date
+            ColumnName to name,
+            ColumnEmail to email,
+            ColumnPassword to password,
+            ColumnDate to date
         )
     }
 

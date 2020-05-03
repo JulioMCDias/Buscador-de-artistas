@@ -2,7 +2,7 @@ package com.jlmcdeveloper.buscadordeartistas.ui.editlogin
 
 import androidx.lifecycle.ViewModel
 import com.jlmcdeveloper.buscadordeartistas.data.Repository
-import com.jlmcdeveloper.buscadordeartistas.data.database.User
+import com.jlmcdeveloper.buscadordeartistas.data.database.model.User
 
 
 class EditLoginViewModel(private val repository: Repository) : ViewModel(){
@@ -20,7 +20,13 @@ class EditLoginViewModel(private val repository: Repository) : ViewModel(){
         success: () -> Unit,
         failure: () -> Unit)
     {
-        val user = User(name, email, password, date, repository.user?.idUser!!)
+        val user = User(
+            name,
+            email,
+            password,
+            date,
+            repository.user?.idUser!!
+        )
 
         repository.updateUser(user, success, failure)
     }

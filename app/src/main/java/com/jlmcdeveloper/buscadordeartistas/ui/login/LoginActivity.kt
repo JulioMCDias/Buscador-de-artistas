@@ -26,18 +26,18 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            loading(true)
 
             if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
                 validateCamp(editTextPassword, textInputLayoutPassword, getString(R.string.campNull)))
             {
+                loading(true)
                 viewModel.login(editTextName.text.toString(), editTextPassword.text.toString(), {
                     loading(false)
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 },{
                     loading(false)
-                    Toast.makeText(this, getString(R.string.error_in_login) + it, Toast.LENGTH_LONG)
+                    Toast.makeText(this, "${getString(R.string.error_in_login)} $it", Toast.LENGTH_LONG)
                         .show()
                 })
             }
