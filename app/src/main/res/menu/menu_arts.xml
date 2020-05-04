@@ -14,13 +14,15 @@
         android:title="@string/login"
         android:visible="true"
         android:icon="@drawable/ic_account_circle_black_24dp"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menu_switch"
+        android:id="@+id/menu_favorite"
         android:title="@string/list_favourite"
         android:visible="true"
-        app:actionLayout="@layout/switch_item" />
+        android:checkable="true"
+        app:actionLayout="@layout/action_layout_styled_checkbox"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_logout"

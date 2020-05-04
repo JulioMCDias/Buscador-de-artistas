@@ -10,9 +10,11 @@ class MainViewModel(private val repository: ArtistRepository) : ViewModel() {
     var artists = MutableLiveData<MutableList<ArtistItem>>()
     val loadingVisibility = MutableLiveData(false)
     val message = MutableLiveData<String>()
+    val favorite = MutableLiveData<Boolean>()
 
     // --------------- lista de artistas ------------
     fun loadListArtist() {
+        favorite.postValue(false)
         loadingVisibility.postValue(true)
 
         // ---- get lista da api ---
@@ -28,6 +30,7 @@ class MainViewModel(private val repository: ArtistRepository) : ViewModel() {
     }
 
     private fun getListFavorites(artistsApi: ArrayList<ArtistItem>){
+        loadingVisibility.postValue(true)
         val listArtsFav = ArrayList<ArtistItem>()
 
         repository.getListFavorites( { favorites ->
@@ -60,6 +63,13 @@ class MainViewModel(private val repository: ArtistRepository) : ViewModel() {
     //---------
 
 
+    fun listFavorites(enable: Boolean){
+        if(enable) {
+            getListFavorites(ArrayList())
+            favorite.postValue(true)
+        }else
+            loadListArtist()
+    }
 
 
 

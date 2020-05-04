@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -16,25 +17,35 @@
         android:layout_margin="4dp"
         app:cardCornerRadius="12dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/image"
-                android:background="@drawable/ic_person_black_24dp"
-                android:padding="8dp"
-                android:minWidth="100dp"
-                android:minHeight="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/arts_photo" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_person_black_24dp"
+                android:contentDescription="@string/arts_photo"
+                android:minWidth="100dp"
+                android:minHeight="100dp"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <LinearLayout
@@ -47,16 +58,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="18sp"
-                        android:text="@string/name_card" />
+                        android:text="@string/name_card"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="20sp"
-                        android:text="@{artist.name}" />
+                        android:text="@{artist.name}"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -71,28 +82,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="18sp"
-                        android:text="@string/views" />
+                        android:text="@string/views"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="20sp"
-                        android:text="@{artist.views}" />
-
-                    <CheckBox
-                        android:id="@+id/favourite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="@{artist.favorit}"
-                        android:button="@drawable/sl_favourite_24dp"
-                        app:buttonTint="@android:color/darker_gray" />
+                        android:text="@{artist.views}"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:button="@drawable/sl_favourite_48dp"
+                android:checked="@{artist.favorit}"
+                android:paddingTop="72dp"
+                app:buttonTint="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>

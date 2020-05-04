@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        app:theme="@style/ToolBarStyle"
         app:titleTextColor="@android:color/white"
         app:title="@string/edit_user"
         app:layout_constraintEnd_toEndOf="parent"
