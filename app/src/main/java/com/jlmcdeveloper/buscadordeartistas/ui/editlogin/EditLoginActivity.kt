@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.jlmcdeveloper.buscadordeartistas.R
+import com.jlmcdeveloper.buscadordeartistas.utils.DatePickerFragment
 import com.jlmcdeveloper.buscadordeartistas.utils.validateCamp
 import com.jlmcdeveloper.buscadordeartistas.utils.validateEmail
 import kotlinx.android.synthetic.main.activity_edit_login.*
@@ -24,7 +25,6 @@ class EditLoginActivity : AppCompatActivity() {
         setTexts()
 
         btnSave.setOnClickListener {
-
 
             if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
                 validateCamp(editTextPassword, textInputLayoutPassword, getString(R.string.campNull)) and
@@ -49,6 +49,14 @@ class EditLoginActivity : AppCompatActivity() {
                             .show()
                     })
             }
+        }
+
+        //----- campo data -------
+        editTextDate.setOnClickListener {
+            val newFragment = DatePickerFragment(editTextDate.text.toString()) { date ->
+                editTextDate.setText(date)
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
         }
     }
 

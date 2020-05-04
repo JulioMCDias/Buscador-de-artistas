@@ -1,11 +1,14 @@
 package com.jlmcdeveloper.buscadordeartistas.ui.createlogin
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jlmcdeveloper.buscadordeartistas.R
+import com.jlmcdeveloper.buscadordeartistas.utils.DatePickerFragment
 import com.jlmcdeveloper.buscadordeartistas.utils.validateCamp
 import com.jlmcdeveloper.buscadordeartistas.utils.validateEmail
 import kotlinx.android.synthetic.main.activity_create_login.*
@@ -20,7 +23,7 @@ class CreateLoginActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbarEditLogin)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        loading(false);
+        loading(false)
 
         btnSave.setOnClickListener {
             if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
@@ -47,9 +50,16 @@ class CreateLoginActivity : AppCompatActivity() {
                             .show()
                     })
             }
-
-
         }
+
+        //----- campo data -------
+        editTextDate.setOnClickListener {
+            val newFragment = DatePickerFragment(editTextDate.text.toString()) { date ->
+                editTextDate.setText(date)
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
+
     }
 
     private fun loading(enable: Boolean){

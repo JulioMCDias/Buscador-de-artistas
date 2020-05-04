@@ -121,6 +121,9 @@
                     android:id="@+id/editTextDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:longClickable="false"
                     android:hint="@string/date_of_birth"
                     android:inputType="date" />
 
