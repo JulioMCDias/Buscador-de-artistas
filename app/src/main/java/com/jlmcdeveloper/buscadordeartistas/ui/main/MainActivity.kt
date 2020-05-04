@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
@@ -20,13 +21,15 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by inject()
+    private var adapter: ArtistAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbarMain)
-        recyclerView.adapter = ArtistAdapter(ArrayList(), viewModel)
+        adapter =  ArtistAdapter(ArrayList(), viewModel)
+        recyclerView.adapter = adapter
 
         // ------ update da lista -------
         viewModel.artists.observe(this, Observer {
@@ -85,6 +88,18 @@ class MainActivity : AppCompatActivity() {
                 // ------ update -----
                 viewModel.favorite.observe(this, Observer {
                     checkBoxFavorite.isChecked = it
+                })
+            }
+            if(item.itemId == R.id.menu_search) {
+                val searchView = item.actionView as SearchView
+                searchView.setOnQueryTextListener( object: SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String): Boolean{
+                        return false
+                    }
+                    override fun onQueryTextChange(newText: String): Boolean{
+                        adapter?.filter?.filter(newText)
+                        return false
+                    }
                 })
             }
         }

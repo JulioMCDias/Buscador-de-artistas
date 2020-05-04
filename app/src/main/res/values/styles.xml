@@ -15,7 +15,10 @@
 
 
     <style name="ToolBarStyle" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+
         <!-- Customize color of navigation drawer icon and back arrow -->
         <item name="colorControlNormal">@android:color/white</item>
     </style>

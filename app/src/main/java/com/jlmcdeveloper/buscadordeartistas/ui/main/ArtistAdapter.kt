@@ -9,15 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jlmcdeveloper.buscadordeartistas.data.model.ArtistItem
 import com.jlmcdeveloper.buscadordeartistas.databinding.ArtsItemBinding
 import com.jlmcdeveloper.buscadordeartistas.databinding.EmptyItemBinding
+import com.jlmcdeveloper.buscadordeartistas.utils.ValueFilter
 
 
 class ArtistAdapter(
-    private val items: ArrayList<ArtistItem>,
+    private val listData: ArrayList<ArtistItem>,
     private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
+    private val listItem = ArrayList<ArtistItem>()
     private val VIEW_TYPE_EMPTY = 0
     private val VIEW_TYPE_NORMAL = 1
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val context = parent.context
@@ -32,36 +35,47 @@ class ArtistAdapter(
 
     override fun getItemCount(): Int {
         return when {
-            viewModel.loadingVisibility.value!! -> items.size
-            items.isEmpty() -> 1
-            else -> items.size
+            viewModel.loadingVisibility.value!! -> listItem.size
+            listData.isEmpty() -> 1
+            else -> listItem.size
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when {
             viewModel.loadingVisibility.value!! -> VIEW_TYPE_NORMAL
-            items.isEmpty() -> VIEW_TYPE_EMPTY
+            listData.isEmpty() -> VIEW_TYPE_EMPTY
             else -> VIEW_TYPE_NORMAL
         }
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when {
-            viewModel.loadingVisibility.value!! -> holder.bind(items[position])
-            items.isEmpty() -> holder.bind(null)
-            else -> holder.bind(items[position])
+            viewModel.loadingVisibility.value!! -> holder.bind(listItem[position])
+            listData.isEmpty() -> holder.bind(null)
+            else -> holder.bind(listItem[position])
         }
     }
 
+    //-------------- atualização da lista ---------------
     fun updateItems(listNote: ArrayList<ArtistItem>) {
-        items.clear()
-        items.addAll(listNote.toMutableList())
-        notifyDataSetChanged()
+        listData.clear()
+        listData.addAll(listNote.toMutableList())
+        filter.filter("")
     }
 
 
-    //----------------- ViewHolder ---------------------
+    // --------------- filtro da pesquisa ----------------
+    val filter = ValueFilter(listData, condition = { item -> item.name!! }, result = { list ->
+        listItem.clear()
+        listItem.addAll(list)
+        notifyDataSetChanged()
+    })
+
+
+
+
+    //====================== ViewHolder =============================
     class ArtistHolder(
         private val viewModel: MainViewModel,
         private val context: Context,
@@ -85,7 +99,7 @@ class ArtistAdapter(
         }
     }
 
-    //----------------- ViewHolder ---------------------
+    //====================== ViewHolder =============================
     class EmptyViewHolder(private val viewModel: MainViewModel, private val binding: EmptyItemBinding) :
         BaseViewHolder(binding.root) {
 
@@ -96,6 +110,4 @@ class ArtistAdapter(
         }
 
     }
-
-
 }
