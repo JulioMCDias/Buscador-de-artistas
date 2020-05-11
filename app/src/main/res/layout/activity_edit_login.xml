@@ -1,165 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_login"
-    tools:context=".ui.createlogin.CreateLoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.jlmcdeveloper.buscadordeartistas.ui.editlogin.EditLoginViewModel" />
+    </data>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarEditLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:theme="@style/ToolBarStyle"
-        app:titleTextColor="@android:color/white"
-        app:title="@string/edit_user"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarEditLogin">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher_foreground"
-                android:contentDescription="@string/logo"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                app:errorEnabled="true"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                tools:layout_editor_absoluteX="32dp">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/name"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:layout_marginHorizontal="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName"
-                tools:layout_editor_absoluteX="32dp">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                app:errorEnabled="true"
-                app:counterEnabled="true"
-                app:counterMaxLength="10"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutDate"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
-                app:passwordToggleEnabled="true"
-                tools:layout_editor_absoluteX="32dp">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                app:errorEnabled="true"
-                app:layout_constraintBottom_toTopOf="@+id/btnSave"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
-                tools:layout_editor_absoluteX="32dp">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:longClickable="false"
-                    android:hint="@string/date_of_birth"
-                    android:inputType="date" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSave"
-                style="@style/TextButton"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:text="@string/save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDate" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <RelativeLayout
-        android:id="@+id/layout_loading"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:elevation="2dp">
+        android:background="@drawable/background_login"
+        tools:context=".ui.createlogin.CreateLoginActivity">
 
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:id="@+id/pb_loading"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarEditLogin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+            android:background="?attr/colorPrimary"
+            app:theme="@style/ToolBarStyle"
+            app:titleTextColor="@android:color/white"
+            app:title="@string/edit_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarEditLogin">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@mipmap/ic_launcher_foreground"
+                    android:contentDescription="@string/logo"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayoutName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    app:errorEnabled="true"
+                    app:errorText="@{viewModel.textErrorName}"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:layout_editor_absoluteX="32dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.editName}"
+                        android:hint="@string/name" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:errorText="@{viewModel.textErrorEmail}"
+                    android:layout_marginHorizontal="32dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName"
+                    tools:layout_editor_absoluteX="32dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.editEmail}"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    app:errorEnabled="true"
+                    app:errorText="@{viewModel.textErrorPassword}"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayoutDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
+                    app:passwordToggleEnabled="true"
+                    tools:layout_editor_absoluteX="32dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.editPassword}"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    app:errorEnabled="true"
+                    app:errorText="@{viewModel.textErrorDate}"
+                    app:layout_constraintBottom_toTopOf="@+id/btnSave"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
+                    tools:layout_editor_absoluteX="32dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.editDate}"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:longClickable="false"
+                        android:hint="@string/date_of_birth"
+                        android:inputType="date" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSave"
+                    style="@style/TextButton"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:text="@string/save"
+                    android:onClick="@{ () -> viewModel.btnSave()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDate" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <RelativeLayout
+            android:id="@+id/layout_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.loadingVisibility ? View.VISIBLE : View.GONE}"
+            android:background="@color/colorBackground"
+            android:elevation="2dp">
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/pb_loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

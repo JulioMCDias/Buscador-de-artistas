@@ -1,33 +1,60 @@
 package com.jlmcdeveloper.buscadordeartistas.ui.editlogin
 
+import android.content.Context
+import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.jlmcdeveloper.buscadordeartistas.R
 import com.jlmcdeveloper.buscadordeartistas.data.Repository
 import com.jlmcdeveloper.buscadordeartistas.data.database.model.User
+import com.jlmcdeveloper.buscadordeartistas.utils.validateCampEmpty
+import com.jlmcdeveloper.buscadordeartistas.utils.validateEmail
 
 
-class EditLoginViewModel(private val repository: Repository) : ViewModel(){
+class EditLoginViewModel(private val repository: Repository, private val context: Context) : ViewModel() {
+    val loadingVisibility = MutableLiveData(false)
 
-    fun getName() : String? = repository.user?.name
-    fun getEmail() : String? = repository.user?.email
-    fun getPassword() : String? = repository.user?.password
-    fun getDate() : String? = repository.user?.date
+    val editName = MutableLiveData<String>(repository.user?.name)
+    val editEmail = MutableLiveData<String>(repository.user?.email)
+    val editPassword = MutableLiveData<String>(repository.user?.password)
+    val editDate = MutableLiveData<String>(repository.user?.date)
 
-    fun btnSave(
-        name: String,
-        email: String,
-        password: String,
-        date: String,
-        success: () -> Unit,
-        failure: () -> Unit)
-    {
-        val user = User(
-            name,
-            email,
-            password,
-            date,
-            repository.user?.idUser!!
-        )
+    val textErrorName = MutableLiveData<String?>()
+    val textErrorEmail = MutableLiveData<String?>()
+    val textErrorPassword = MutableLiveData<String?>()
+    val textErrorDate = MutableLiveData<String?>()
 
-        repository.updateUser(user, success, failure)
+
+    var success: (() -> Unit)? = null
+    var failure: (() -> Unit)? = null
+
+
+    fun btnSave() {
+        loadingVisibility.postValue(true)
+        if (validateCampEmpty(editName, textErrorName, context.getString(R.string.campNull)) and
+            validateCampEmpty(editPassword, textErrorPassword, context.getString(R.string.campNull)) and
+            validateCampEmpty(editDate, textErrorDate, context.getString(R.string.campNull)) and
+            validateEmail(editEmail, textErrorEmail,
+                context.getString(R.string.campNull),
+                context.getString(R.string.email_valid)))
+        {
+
+            val user = User(
+                editName.value!!,
+                editEmail.value!!,
+                editPassword.value!!,
+                editDate.value!!,
+                repository.user!!.idUser)
+
+
+            repository.updateUser(user, {
+                loadingVisibility.postValue(false)
+                success?.let { it() }
+            }, {
+                loadingVisibility.postValue(false)
+                failure?.let { it() }
+            })
+        }else
+            loadingVisibility.postValue(false)
     }
 }

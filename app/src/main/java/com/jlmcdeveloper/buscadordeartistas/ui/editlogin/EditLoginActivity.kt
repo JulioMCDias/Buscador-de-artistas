@@ -3,53 +3,41 @@ package com.jlmcdeveloper.buscadordeartistas.ui.editlogin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.jlmcdeveloper.buscadordeartistas.R
+import com.jlmcdeveloper.buscadordeartistas.databinding.ActivityEditLoginBinding
 import com.jlmcdeveloper.buscadordeartistas.utils.DatePickerFragment
-import com.jlmcdeveloper.buscadordeartistas.utils.validateCamp
-import com.jlmcdeveloper.buscadordeartistas.utils.validateEmail
 import kotlinx.android.synthetic.main.activity_edit_login.*
 import org.koin.android.ext.android.inject
 
 class EditLoginActivity : AppCompatActivity() {
     private val viewModel: EditLoginViewModel by inject()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_login)
+        val binding: ActivityEditLoginBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_edit_login)
 
-        setSupportActionBar(toolbarEditLogin)
+        setSupportActionBar(binding.toolbarEditLogin)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        loading(false);
-        setTexts()
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-        btnSave.setOnClickListener {
 
-            if(validateCamp(editTextName, textInputLayoutName, getString(R.string.campNull)) and
-                validateCamp(editTextPassword, textInputLayoutPassword, getString(R.string.campNull)) and
-                validateCamp(editTextDate, textInputLayoutDate, getString(R.string.campNull)) and
-                validateEmail(editTextEmail, textInputLayoutEmail, getString(R.string.campNull),
-                    getString(R.string.email_valid))
-            ) {
-                loading(true)
-                viewModel.btnSave(
-                    editTextName.text.toString(),
-                    editTextEmail.text.toString(),
-                    editTextPassword.text.toString(),
-                    editTextDate.text.toString(),
-                    {
-                        loading(false)
-                        Toast.makeText(this, getString(R.string.update_user), Toast.LENGTH_SHORT)
-                            .show()
-                        finish()
-                    }, {
-                        loading(false)
-                        Toast.makeText(this, getString(R.string.error_update_user), Toast.LENGTH_SHORT)
-                            .show()
-                    })
-            }
+        viewModel.success = {
+            Toast.makeText(this, getString(R.string.update_user),
+                Toast.LENGTH_SHORT).show()
+            finish()
         }
+
+        viewModel.failure = {
+            Toast.makeText(this, getString(R.string.error_update_user),
+                Toast.LENGTH_SHORT).show()
+        }
+
+
 
         //----- campo data -------
         editTextDate.setOnClickListener {
@@ -60,17 +48,6 @@ class EditLoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTexts(){
-        editTextName.setText(viewModel.getName())
-        editTextEmail.setText(viewModel.getEmail())
-        editTextPassword.setText(viewModel.getPassword())
-        editTextDate.setText(viewModel.getDate())
-    }
-
-    private fun loading(enable: Boolean){
-        pb_loading.visibility = if(enable) View.VISIBLE else View.GONE
-        layout_loading.visibility = if(enable) View.VISIBLE else View.GONE
-    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
