@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -64,26 +65,29 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // koin version
-    implementation "org.koin:koin-android:2.1.5"
-    implementation "org.koin:koin-android-viewmodel:2.1.5"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.7.1"
     implementation "com.squareup.retrofit2:converter-gson:2.7.1"
+    implementation 'com.squareup.okhttp3:mockwebserver:4.6.0'
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    // Koin for Unit tests
-    testImplementation "org.koin:koin-test:2.1.5"
 
 
-    // test unidade
+    // test Unit
     testImplementation 'junit:junit:4.13'
     testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'org.mockito:mockito-core:2.23.0'
+    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.6.0'
 
     // test android
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation "org.koin:koin-test:$koin_version"
+    androidTestImplementation "org.mockito:mockito-android:2.15.0"
 }
